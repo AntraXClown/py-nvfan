@@ -1,12 +1,9 @@
 from .nvidialib import getTotalDevices, setFanDuty
-from .config import VERSION, printAsciiArt, AppConfig
+from .config import VERSION, printAsciiArt, AppConfig, cl, pc
 from confz import FileSource
-from rich.console import Console
 import argparse
 import os
 import sys
-
-cl = Console()
 
 
 def passArgs() -> None:
@@ -39,14 +36,15 @@ def passArgs() -> None:
 
     AppConfig.CONFIG_SOURCES = FileSource(file=args.config)
 
-    print(args.config)
+    # print(args.config)
     if not os.path.exists(args.config):
         cl.print("[bold red]Config file not found[/bold red]")
         sys.exit(1)
     else:
         appConfig = AppConfig()
-        print(appConfig.targetTemps)
-        print(appConfig.targetDuties)
+        pc(message="using config file", variable=args.config)
+        pc(message="targetTemps", variable=appConfig.targetTemps)
+        pc(message="targetDuties", variable=appConfig.targetDuties)
 
 
 def main() -> None:

@@ -1,9 +1,16 @@
-from confz import BaseConfig, FileSource
 import os
+from typing import Any
+from confz import BaseConfig, FileSource
+from rich.console import Console
 
 
 APP_NAME = "py-nvfan"
-VERSION = "0.1.2"
+VERSION = "0.1.4"
+cl = Console()
+
+
+def pc(message: str, variable: Any) -> None:
+    cl.print(f"[bold yellow]{message}[/bold yellow]: {variable}")
 
 
 def printAsciiArt() -> None:
