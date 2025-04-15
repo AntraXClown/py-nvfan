@@ -63,19 +63,24 @@ def passArgs() -> None:
                             targetTemps=appConfig.temps,
                             targetDuties=appConfig.fanSpeeds,
                         )
+                        fanCount = getFanCount(gpu_index=i)
+                        pc(message="Fan Count\t", variable=fanCount)
                         currentFanSpeed: int = getFanSpeed(gpu_index=i)
                         pc(
                             message="Fan Speed\t",
-                            variable=f"{getFanSpeed(gpu_index=i)}%",
+                            variable=f"{currentFanSpeed}%",
                         )
-                        fanCount = getFanCount(gpu_index=i)
-                        pc(message="Fan Count\t", variable=fanCount)
-                        # if currentFanSpeed != newfanSpeed:
-                        #     setFanSpeed(gpu_index=i, fan_speed=newfanSpeed)
-                        #     pc(
-                        #         message="New Fan Speed\t",
-                        #         variable=f"{newfanSpeed}%",
-                        #     )
+
+                        cl.print(
+                            f"currentFanSpeed: {currentFanSpeed} newfanSpeed: {newfanSpeed}"
+                        )
+                        if currentFanSpeed != newfanSpeed:
+                            pc(message="Setting new fan speed...", variable=newfanSpeed)
+                            setFanSpeed(gpu_index=i, fan_speed=newfanSpeed)
+                            pc(
+                                message="New Fan Speed\t",
+                                variable=f"{newfanSpeed}%",
+                            )
 
                     time.sleep(1)
 

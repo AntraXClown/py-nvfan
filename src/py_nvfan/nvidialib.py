@@ -26,13 +26,14 @@ def getFanCount(gpu_index: int) -> int:
 
 
 def setFanSpeed(gpu_index: int, fan_speed: int) -> None:
-    """Define a velocidade da fan para a GPU especificada."""
+    """Sets fan speed for specified GPU using nvidia-settings with X server permissions."""
     if not 0 <= fan_speed <= 100:
         raise ValueError("Fan speed must be between 0 and 100.")
+
+    os.system("xhost +si:localuser:root")  # Enable X server access for root
     os.system(
         f"sudo nvidia-settings -a '[gpu:{gpu_index}]/GPUFanControlState=1' -a '[fan:0]/GPUTargetFanSpeed={fan_speed}'"
     )
-    # print(f"Fan speed for GPU {gpu_index} set to {fan_speed}%.")
 
 
 def getTotalDevices() -> int:
