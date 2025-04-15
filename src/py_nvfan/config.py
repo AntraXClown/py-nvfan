@@ -4,6 +4,8 @@ from confz import BaseConfig, FileSource
 from rich.console import Console
 
 
+# SeuUsuario ALL=(ALL) NOPASSWD: /usr/bin/nvidia-settings
+
 APP_NAME = "py-nvfan"
 VERSION = "0.1.4"
 cl = Console()
@@ -32,5 +34,5 @@ class AppConfig(BaseConfig):
         )
     )
 
-    targetTemps: list[int]
-    targetDuties: list[int]
+    temps: list[int]
+    fanSpeeds: list[int]

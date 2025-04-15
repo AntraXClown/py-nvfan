@@ -1,4 +1,5 @@
 import pynvml
+import os
 
 pynvml.nvmlInit()
 
@@ -12,6 +13,26 @@ def getFanSpeed(gpu_index: int) -> int:
     except pynvml.NVMLError as error:
         print(f"Failed to get fan speed for GPU {gpu_index}: {error}")
         raise  # Re-raise the exception so the caller can handle it
+
+
+def getFanCount(gpu_index: int) -> int:
+    # Get the handle for the GPU
+    gpuHandle = pynvml.nvmlDeviceGetHandleByIndex(index=gpu_index)
+
+    # Get the number of fans for this GPU
+    fanCount = pynvml.nvmlDeviceGetNumFans(device=gpuHandle)
+
+    return fanCount
+
+
+def setFanSpeed(gpu_index: int, fan_speed: int) -> None:
+    """Define a velocidade da fan para a GPU especificada."""
+    if not 0 <= fan_speed <= 100:
+        raise ValueError("Fan speed must be between 0 and 100.")
+    os.system(
+        f"sudo nvidia-settings -a '[gpu:{gpu_index}]/GPUFanControlState=1' -a '[fan:0]/GPUTargetFanSpeed={fan_speed}'"
+    )
+    # print(f"Fan speed for GPU {gpu_index} set to {fan_speed}%.")
 
 
 def getTotalDevices() -> int:
@@ -42,7 +63,7 @@ def getGpuTemperature(gpu_index: int) -> int:
         raise  # Re-levanta a exceção para que o chamador possa lidar com ela
 
 
-def setFanDuty(
+def getFanDuty(
     currentTemp: int, targetTemps: list[int], targetDuties: list[int]
 ) -> int:
     if not targetTemps or not targetDuties or len(targetTemps) != len(targetDuties):

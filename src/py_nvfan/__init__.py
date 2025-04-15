@@ -44,8 +44,8 @@ def passArgs() -> None:
     else:
         appConfig = AppConfig()
         pc(message="using config file", variable=args.config)
-        pc(message="targetTemps", variable=appConfig.targetTemps)
-        pc(message="targetDuties", variable=appConfig.targetDuties)
+        pc(message="Temperatures", variable=appConfig.temps)
+        pc(message="FanSpeeds", variable=appConfig.fanSpeeds)
         totalDevices = getTotalDevices()
         pc(message="Total devices", variable=totalDevices)
         while True:
@@ -54,20 +54,28 @@ def passArgs() -> None:
                     for i in range(totalDevices):
                         cl.print("-" * 40)
                         cl.print(
-                            f"[bold yellow]Device[/bold yellow]\t\t: [{i}] - {getDeviceName(i)}"
+                            f"[bold yellow]Device[/bold yellow]\t\t: [{i}] - {getDeviceName(gpu_index=i)}"
                         )
-                        currentTemp = getGpuTemperature(gpu_index=i)
+                        currentTemp: int = getGpuTemperature(gpu_index=i)
                         pc(message="Temperature\t", variable=f"{currentTemp}°C")
-                        fanDuty = setFanDuty(
+                        newfanSpeed = getFanDuty(
                             currentTemp=currentTemp,
-                            targetTemps=appConfig.targetTemps,
-                            targetDuties=appConfig.targetDuties,
+                            targetTemps=appConfig.temps,
+                            targetDuties=appConfig.fanSpeeds,
                         )
-                        pc(message="Fan Duty\t", variable=f"{fanDuty}%")
+                        currentFanSpeed: int = getFanSpeed(gpu_index=i)
                         pc(
                             message="Fan Speed\t",
                             variable=f"{getFanSpeed(gpu_index=i)}%",
                         )
+                        fanCount = getFanCount(gpu_index=i)
+                        pc(message="Fan Count\t", variable=fanCount)
+                        # if currentFanSpeed != newfanSpeed:
+                        #     setFanSpeed(gpu_index=i, fan_speed=newfanSpeed)
+                        #     pc(
+                        #         message="New Fan Speed\t",
+                        #         variable=f"{newfanSpeed}%",
+                        #     )
 
                     time.sleep(1)
 
