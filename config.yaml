@@ -1,8 +1,16 @@
+# py-nvfan
+# This is a configuration file for the fan control system.
+
+# targetTemps
+# The target temperatures are the temperatures at which the fan should operate.
 targetTemps:
   - 30
   - 50
   - 60
   - 80
+
+# targetDuties
+# The duty cycle is the percentage of time the fan is on in a given period.
 targetDuties:
   - 40
   - 60
