@@ -2,17 +2,18 @@ from confz import BaseConfig, FileSource
 import os
 
 
-APP_NAME = "docker-whatch"
+APP_NAME = "py-nvfan"
 VERSION = "0.1.0"
 
 
 def printAsciiArt() -> None:
     asciiArt = r"""
-     _            _                          _           _       _
-  __| | ___   ___| | _____ _ __    __      _| |__   __ _| |_ ___| |__
- / _` |/ _ \ / __| |/ / _ \ '__|___\ \ /\ / / '_ \ / _` | __/ __| '_ \
-| (_| | (_) | (__|   <  __/ | |_____\ V  V /| | | | (_| | || (__| | | |
- \__,_|\___/ \___|_|\_\___|_|        \_/\_/ |_| |_|\__,_|\__\___|_| |_|
+                               __             
+ _ __  _   _       _ ____   __/ _| __ _ _ __  
+| '_ \| | | |_____| '_ \ \ / / |_ / _` | '_ \ 
+| |_) | |_| |_____| | | \ V /|  _| (_| | | | |
+| .__/ \__, |     |_| |_|\_/ |_|  \__,_|_| |_|
+|_|    |___/                
     """
     print(asciiArt)
 
@@ -23,3 +24,5 @@ class AppConfig(BaseConfig):
             os.path.expanduser(path="~"), ".config", f"{APP_NAME}", "config.yaml"
         )
     )
+
+    targetTemps: list[int]
