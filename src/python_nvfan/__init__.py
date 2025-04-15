@@ -1,7 +1,12 @@
-from pynvml_utils import nvidia_smi
+from .nvidialib import getTotalDevices
+from .config import printAsciiArt
+from rich.console import Console
+
+cl = Console()
 
 
 def main() -> None:
-    nvsmi = nvidia_smi.getInstance()
-    temp = nvsmi.DeviceQuery(filter="temperature.gpu")
-    print(temp["gpu"][0])
+    printAsciiArt()
+    # totalDevices = getTotalDevices()
+    # for i in range(totalDevices):
+    #     cl.print(f"Device {i}:")
