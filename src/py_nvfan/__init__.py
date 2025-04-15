@@ -1,9 +1,10 @@
-from .nvidialib import getTotalDevices, setFanDuty
+from .nvidialib import *
 from .config import VERSION, printAsciiArt, AppConfig, cl, pc
 from confz import FileSource
 import argparse
 import os
 import sys
+import time
 
 
 def passArgs() -> None:
@@ -45,6 +46,34 @@ def passArgs() -> None:
         pc(message="using config file", variable=args.config)
         pc(message="targetTemps", variable=appConfig.targetTemps)
         pc(message="targetDuties", variable=appConfig.targetDuties)
+        totalDevices = getTotalDevices()
+        pc(message="Total devices", variable=totalDevices)
+        while True:
+            with cl.status("Running...") as status:
+                try:
+                    for i in range(totalDevices):
+                        cl.print("-" * 40)
+                        cl.print(
+                            f"[bold yellow]Device[/bold yellow]\t\t: [{i}] - {getDeviceName(i)}"
+                        )
+                        currentTemp = getGpuTemperature(gpu_index=i)
+                        pc(message="Temperature\t", variable=f"{currentTemp}°C")
+                        fanDuty = setFanDuty(
+                            currentTemp=currentTemp,
+                            targetTemps=appConfig.targetTemps,
+                            targetDuties=appConfig.targetDuties,
+                        )
+                        pc(message="Fan Duty\t", variable=f"{fanDuty}%")
+                        pc(
+                            message="Fan Speed\t",
+                            variable=f"{getFanSpeed(gpu_index=i)}%",
+                        )
+
+                    time.sleep(1)
+
+                except KeyboardInterrupt:
+                    cl.print("[bold red]Exiting...[/bold red]")
+                    break
 
 
 def main() -> None:
