@@ -1,4 +1,4 @@
-from .nvidialib import getTotalDevices
+from .nvidialib import getTotalDevices, setFanDuty
 from .config import VERSION, printAsciiArt, AppConfig
 from confz import FileSource
 from rich.console import Console
@@ -30,7 +30,7 @@ def passArgs() -> None:
         "-v",
         "--version",
         action="version",
-        version=f"{VERSION}",
+        version=f"Version {VERSION}",
         help="Show the version and exit",
     )
 
@@ -46,10 +46,23 @@ def passArgs() -> None:
     else:
         appConfig = AppConfig()
         print(appConfig.targetTemps)
+        print(appConfig.targetDuties)
 
 
 def main() -> None:
     passArgs()
+    # currentTemp = 70
+    # appConfig = AppConfig()
+    # print(f"currentTemp: {currentTemp}")
+    # print(f"targetTemps: {appConfig.targetTemps}")
+    # print(f"targetDuties: {appConfig.targetDuties}")
+    # fanDuty = setFanDuty(
+    #     currentTemp=currentTemp,
+    #     targetTemps=appConfig.targetTemps,
+    #     targetDuties=appConfig.targetDuties,
+    # )
+    # print(f"fanDuty: {fanDuty}")
+
     # totalDevices = getTotalDevices()
     # for i in range(totalDevices):
     #     cl.print(f"Device {i}:")

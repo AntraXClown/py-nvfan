@@ -3,3 +3,8 @@ targetTemps:
   - 50
   - 60
   - 80
+targetDuties:
+  - 40
+  - 60
+  - 80
+  - 100

@@ -3,7 +3,7 @@ import os
 
 
 APP_NAME = "py-nvfan"
-VERSION = "0.1.0"
+VERSION = "0.1.2"
 
 
 def printAsciiArt() -> None:
@@ -26,3 +26,4 @@ class AppConfig(BaseConfig):
     )
 
     targetTemps: list[int]
+    targetDuties: list[int]
