@@ -8,11 +8,14 @@ py-nvfan is a Python application designed to monitor and control NVIDIA GPU fan 
 - Automatic fan control based on temperature
 - Command-line interface for easy usage
 - Logging and status reporting
+- Works with both Xorg and Wayland.
 
 ## Requirements
+- Any recent Linux distribution
 - Python 3.12+
 - NVIDIA GPU with supported drivers
 - Linux x86_64 operating system
+- [xorg-xhost](https://www.x.org/archive/X11R7.7/doc/man/man1/xhost.1.xhtml) server access control program for X. 
 - [nvidia-smi](https://developer.nvidia.com/nvidia-system-management-interface) installed and available in **PATH**
 - [nvidia-settings](https://www.nvidia.com/en-us/) installed and available in **PATH**
 - [pip](https://pypi.org/project/pip/) for project management or use the **pip**.
