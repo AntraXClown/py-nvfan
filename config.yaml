@@ -6,13 +6,15 @@
 temps:
   - 30
   - 50
-  - 60
+  - 70
   - 80
+  - 100
 
 # targetDuties
 # The duty cycle is the percentage of time the fan is on in a given period.
 fanSpeeds:
-  - 40
-  - 60
+  - 30
+  - 50
+  - 70
   - 80
   - 100

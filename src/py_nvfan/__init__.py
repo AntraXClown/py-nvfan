@@ -48,11 +48,13 @@ def passArgs() -> None:
         pc(message="FanSpeeds", variable=appConfig.fanSpeeds)
         totalDevices = getTotalDevices()
         pc(message="Total devices", variable=totalDevices)
+        checkingNumber: int = 0
         while True:
             with cl.status("Running...") as status:
                 try:
                     for i in range(totalDevices):
                         cl.print("-" * 40)
+                        pc(message="Checking Number\t", variable=checkingNumber)
                         cl.print(
                             f"[bold yellow]Device[/bold yellow]\t\t: [{i}] - {getDeviceName(gpu_index=i)}"
                         )
@@ -71,18 +73,19 @@ def passArgs() -> None:
                             variable=f"{currentFanSpeed}%",
                         )
 
-                        cl.print(
-                            f"currentFanSpeed: {currentFanSpeed} newfanSpeed: {newfanSpeed}"
-                        )
-                        if currentFanSpeed != newfanSpeed:
+                        if newfanSpeed != currentFanSpeed:
                             pc(message="Setting new fan speed...", variable=newfanSpeed)
                             setFanSpeed(gpu_index=i, fan_speed=newfanSpeed)
                             pc(
                                 message="New Fan Speed\t",
                                 variable=f"{newfanSpeed}%",
                             )
+                            # Add a small delay after changing fan speed
+                            time.sleep(1)
 
-                    time.sleep(1)
+                        checkingNumber += 1
+
+                    time.sleep(5)
 
                 except KeyboardInterrupt:
                     cl.print("[bold red]Exiting...[/bold red]")
@@ -91,18 +94,3 @@ def passArgs() -> None:
 
 def main() -> None:
     passArgs()
-    # currentTemp = 70
-    # appConfig = AppConfig()
-    # print(f"currentTemp: {currentTemp}")
-    # print(f"targetTemps: {appConfig.targetTemps}")
-    # print(f"targetDuties: {appConfig.targetDuties}")
-    # fanDuty = setFanDuty(
-    #     currentTemp=currentTemp,
-    #     targetTemps=appConfig.targetTemps,
-    #     targetDuties=appConfig.targetDuties,
-    # )
-    # print(f"fanDuty: {fanDuty}")
-
-    # totalDevices = getTotalDevices()
-    # for i in range(totalDevices):
-    #     cl.print(f"Device {i}:")
