@@ -6,8 +6,11 @@ from rich.console import Console
 
 # SeuUsuario ALL=(ALL) NOPASSWD: /usr/bin/nvidia-settings
 
+# APP_NAME
 APP_NAME = "py-nvfan"
-VERSION = "0.1.4"
+# APP_VERSION
+VERSION = "0.1.6"
+
 cl = Console()
 
 
