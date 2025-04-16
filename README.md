@@ -10,22 +10,27 @@ py-nvfan is a Python application designed to monitor and control NVIDIA GPU fan 
 - Logging and status reporting
 
 ## Requirements
-- Python 3.13+
+- Python 3.12+
 - NVIDIA GPU with supported drivers
 - Linux x86_64 operating system
 - [nvidia-smi](https://developer.nvidia.com/nvidia-system-management-interface) installed and available in **PATH**
 - [nvidia-settings](https://www.nvidia.com/en-us/) installed and available in **PATH**
-- [UV](https://github.com/astral-sh/uv) for project management or use the OLD pip.
+- [pip](https://pypi.org/project/pip/) for project management or use the **pip**.
 
 ## Installation
 1. Create activate a python virtual environment:
    ```bash
-   uv venv --python 3.14
+   cd any-directory
+   python -m venv .venv # if you use pip
    ```
 2. Activate the python virtual environment:
    ```bash
    source .venv/bin/activate.fish # if you use fish
    source .venv/bin/activate # if you use bash or zsh
+   ```   
+3. Install py-nvfan
+   ```bash
+   pip install py-nvfan
    ```   
 
 ## Usage
@@ -36,11 +41,18 @@ Run the application from the command line:
 py-nvfan [OPTIONS]
 ```
 
-### Options
+
+## Options
 - `-c`, `--config <path>`: Path to the config file (default: config.yaml)
 - `-v`, `--version`: Show the version and exit
 
 ### Examples
+
+Show the help:
+```bash
+py-nvfan --help
+```
+
 Run with default configuration:
 ```bash
 py-nvfan
@@ -54,6 +66,17 @@ py-nvfan --config /path/to/config.yaml
 Show version information:
 ```bash
 py-nvfan --version
+```
+
+## Config File
+By default, **py-nvfan** will create the ***config.yaml*** file (configuration file) in the directory
+***/home/your-username/.config/py-nvfan/***
+
+If you want to use a different configuration file, use the --config option
+
+For example:
+```bash
+py-nvfan --config /path/to/another/dir/config.yaml
 ```
 
 ## Contributing
