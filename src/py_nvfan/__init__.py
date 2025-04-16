@@ -1,5 +1,5 @@
 from .nvidialib import *
-from .config import VERSION, printAsciiArt, AppConfig, cl, pc
+from .config import VERSION, printAsciiArt, AppConfig, cl, pc, createConfigFile
 from confz import FileSource
 import argparse
 import os
@@ -39,52 +39,52 @@ def passArgs() -> None:
 
     # print(args.config)
     if not os.path.exists(args.config):
-        cl.print("[bold red]Config file not found[/bold red]")
-        sys.exit(1)
-    else:
-        appConfig = AppConfig()
-        pc(message="using config file", variable=args.config)
-        pc(message="Temperatures", variable=appConfig.temps)
-        pc(message="FanSpeeds", variable=appConfig.fanSpeeds)
-        totalDevices = getTotalDevices()
-        pc(message="Total devices", variable=totalDevices)
-        checkingNumber: int = 0
-        while True:
-            with cl.status("Running...") as status:
-                try:
-                    for i in range(totalDevices):
-                        cl.print("-" * 40)
-                        pc(message="Checking Number\t", variable=checkingNumber)
-                        cl.print(
-                            f"[bold yellow]Device[/bold yellow]\t\t: [{i}] - {getDeviceName(gpu_index=i)}"
-                        )
-                        currentTemp: int = getGpuTemperature(gpu_index=i)
-                        pc(message="Temperature\t", variable=f"{currentTemp}°C")
-                        newfanSpeed = getFanDuty(
-                            currentTemp=currentTemp,
-                            targetTemps=appConfig.temps,
-                            targetDuties=appConfig.fanSpeeds,
-                        )
-                        fanCount = getFanCount(gpu_index=i)
-                        pc(message="Fan Count\t", variable=fanCount)
-                        currentFanSpeed: int = getFanSpeed(gpu_index=i)
-                        pc(
-                            message="Fan Speed\t",
-                            variable=f"{currentFanSpeed}%",
-                        )
+        cl.print("[bold red]Config file not found, creating...[/bold red]")
+        createConfigFile(configFile=args.config)
 
-                        if newfanSpeed != currentFanSpeed:
-                            setFanSpeed(gpu_index=i, fan_speed=newfanSpeed)
-                            # Add a small delay after changing fan speed
-                            time.sleep(5)
+    appConfig = AppConfig()
+    pc(message="using config file", variable=args.config)
+    pc(message="Temperatures", variable=appConfig.temps)
+    pc(message="FanSpeeds", variable=appConfig.fanSpeeds)
+    totalDevices = getTotalDevices()
+    pc(message="Total devices", variable=totalDevices)
+    checkingNumber: int = 0
+    while True:
+        with cl.status("Running...") as status:
+            try:
+                for i in range(totalDevices):
+                    cl.print("-" * 40)
+                    pc(message="Checking Number\t", variable=checkingNumber)
+                    cl.print(
+                        f"[bold yellow]Device[/bold yellow]\t\t: [{i}] - {getDeviceName(gpu_index=i)}"
+                    )
+                    currentTemp: int = getGpuTemperature(gpu_index=i)
+                    pc(message="Temperature\t", variable=f"{currentTemp}°C")
+                    newfanSpeed = getFanDuty(
+                        currentTemp=currentTemp,
+                        targetTemps=appConfig.temps,
+                        targetDuties=appConfig.fanSpeeds,
+                    )
+                    fanCount = getFanCount(gpu_index=i)
+                    pc(message="Fan Count\t", variable=fanCount)
+                    currentFanSpeed: int = getFanSpeed(gpu_index=i)
+                    pc(
+                        message="Fan Speed\t",
+                        variable=f"{currentFanSpeed}%",
+                    )
 
-                        checkingNumber += 1
+                    if newfanSpeed != currentFanSpeed:
+                        setFanSpeed(gpu_index=i, fan_speed=newfanSpeed)
+                        # Add a small delay after changing fan speed
+                        time.sleep(5)
 
-                    time.sleep(5)
+                    checkingNumber += 1
 
-                except KeyboardInterrupt:
-                    cl.print("[bold red]Exiting...[/bold red]")
-                    break
+                time.sleep(5)
+
+            except KeyboardInterrupt:
+                cl.print("[bold red]Exiting...[/bold red]")
+                break
 
 
 def main() -> None:

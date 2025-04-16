@@ -9,9 +9,51 @@ from rich.console import Console
 # APP_NAME
 APP_NAME = "py-nvfan"
 # APP_VERSION
-VERSION = "0.1.9"
+
+
+VERSION = "0.1.10"
 
 cl = Console()
+
+
+def createConfigFile(configFile: str) -> None:
+    """
+    Create the config file if it doesn't exist.
+    """
+
+    if not os.path.exists(configFile):
+        dir_name = os.path.dirname(configFile)
+        if dir_name:
+            os.makedirs(
+                name=dir_name,
+                exist_ok=True,
+            )
+        with open(file=configFile, mode="w") as f:
+            f.write(
+                """#-----------------------------------------------------
+# py-nvfan
+# This is a configuration file for the fan control system.
+#-----------------------------------------------------
+
+# temps
+# The target temperatures are the temperatures at which the fan should operate.
+temps:
+- 30
+- 50
+- 70
+- 80
+- 100
+
+# targetDuties
+# The duty cycle is the percentage of time the fan is on in a given period.
+fanSpeeds:
+- 30
+- 50
+- 70
+- 80
+- 100
+                """
+            )
 
 
 def pc(message: str, variable: Any) -> None:
