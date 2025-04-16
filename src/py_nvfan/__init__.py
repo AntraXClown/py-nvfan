@@ -93,4 +93,5 @@ def passArgs() -> None:
 
 
 def main() -> None:
-    passArgs()
+    # passArgs()
+    setFanSpeed(gpu_index=0, fan_speed=30)
