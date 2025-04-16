@@ -11,7 +11,7 @@ APP_NAME = "py-nvfan"
 # APP_VERSION
 
 
-VERSION = "0.1.13"
+VERSION = "0.1.14"
 
 cl = Console()
 

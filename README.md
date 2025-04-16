@@ -79,6 +79,38 @@ For example:
 py-nvfan --config /path/to/another/dir/config.yaml
 ```
 
+## Configuration File Structure
+
+The configuration file (typically named `config.yaml`) defines how py-nvfan manages GPU fan speeds based on temperature thresholds. Below is an example and explanation of its structure:
+
+```yaml
+# py-nvfan
+# This is a configuration file for the fan control system.
+
+# temps
+# The target temperatures (in °C) at which the fan speed should change.
+temps:
+- 30
+- 50
+- 70
+- 80
+- 100
+
+# fanSpeeds
+# The corresponding fan duty cycles (in %) for each temperature threshold.
+fanSpeeds:
+- 30
+- 50
+- 70
+- 80
+- 100
+```
+
+- **temps**: List of temperature thresholds (in Celsius). When the GPU temperature reaches or exceeds a value in this list, the corresponding fan speed from `fanSpeeds` is applied.
+- **fanSpeeds**: List of fan duty cycles (percentages). Each value corresponds to the temperature at the same position in the `temps` list.
+
+The lists must have the same length, and values should be ordered from lowest to highest temperature. Adjust these values to fit your cooling preferences and hardware capabilities.
+
 ## Contributing
 Contributions are welcome! Please open issues or submit pull requests for improvements or bug fixes.
 
