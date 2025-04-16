@@ -74,14 +74,9 @@ def passArgs() -> None:
                         )
 
                         if newfanSpeed != currentFanSpeed:
-                            pc(message="Setting new fan speed...", variable=newfanSpeed)
                             setFanSpeed(gpu_index=i, fan_speed=newfanSpeed)
-                            pc(
-                                message="New Fan Speed\t",
-                                variable=f"{newfanSpeed}%",
-                            )
                             # Add a small delay after changing fan speed
-                            time.sleep(1)
+                            time.sleep(5)
 
                         checkingNumber += 1
 
@@ -93,5 +88,4 @@ def passArgs() -> None:
 
 
 def main() -> None:
-    # passArgs()
-    setFanSpeed(gpu_index=0, fan_speed=30)
+    passArgs()
