@@ -3,4 +3,4 @@
 rm -rfv dist/
 
 uv build
-uv publish --index testpypi
+uv publish

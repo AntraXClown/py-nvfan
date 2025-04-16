@@ -1,6 +1,6 @@
 [project]
 name            = "py-nvfan"
-version         = "0.1.11"
+version         = "0.1.12"
 description     = "Automatic Fan Control for NVIDIA Graphics Cards Based on Temperature."
 readme          = "README.md"
 authors         = [{ name = "Antrax", email = "fredcox@gmail.com" }]
