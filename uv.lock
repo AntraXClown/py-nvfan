@@ -1,6 +1,9 @@
 version = 1
 revision = 1
 requires-python = ">=3.13"
+required-markers = [
+    "platform_machine == 'x86_64' and sys_platform == 'linux'",
+]
 
 [[package]]
 name = "annotated-types"
@@ -135,7 +138,7 @@ wheels = [
 
 [[package]]
 name = "py-nvfan"
-version = "0.1.0"
+version = "0.1.8"
 source = { editable = "." }
 dependencies = [
     { name = "black" },
