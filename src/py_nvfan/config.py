@@ -9,7 +9,7 @@ from rich.console import Console
 # APP_NAME
 APP_NAME = "py-nvfan"
 # APP_VERSION
-VERSION = "0.1.7"
+VERSION = "0.1.9"
 
 cl = Console()
 
