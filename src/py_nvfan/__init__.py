@@ -11,7 +11,7 @@ def passArgs() -> None:
     printAsciiArt()
     # Configuração do parser
     parser = argparse.ArgumentParser(
-        description=f"py-nvfan v{VERSION}: Monitor NVIDIA GPU fans and temperatures.",
+        description=f"py-nvfan v{VERSION}: Automatic Fan Control for NVIDIA Graphics Cards Based on Temperature.",
     )
 
     # Argumentos

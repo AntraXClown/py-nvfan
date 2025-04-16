@@ -13,30 +13,47 @@ py-nvfan is a Python application designed to monitor and control NVIDIA GPU fan 
 - Python 3.13+
 - NVIDIA GPU with supported drivers
 - Linux x86_64 operating system
-- [nvidia-smi](https://developer.nvidia.com/nvidia-system-management-interface) installed and available in PATH
-- [UV](https://github.com/astral-sh/uv) for project management
+- [nvidia-smi](https://developer.nvidia.com/nvidia-system-management-interface) installed and available in **PATH**
+- [nvidia-settings](https://www.nvidia.com/en-us/) installed and available in **PATH**
+- [UV](https://github.com/astral-sh/uv) for project management or use the OLD pip.
 
 ## Installation
-1. Clone this repository:
+1. Create activate a python virtual environment:
    ```bash
-   git clone https://github.com/yourusername/py-nvfan.git
-   cd py-nvfan
+   uv venv --python 3.14
    ```
-2. Install dependencies using UV:
+2. Activate the python virtual environment:
    ```bash
-   uv sync
-   ```
-
+   source .venv/bin/activate.fish # if you use fish
+   source .venv/bin/activate # if you use bash or zsh
+   ```   
 
 ## Usage
+
 Run the application from the command line:
+
 ```bash
-uv venv python main.py [options]
+py-nvfan [OPTIONS]
 ```
 
-Example:
+### Options
+- `-c`, `--config <path>`: Path to the config file (default: config.yaml)
+- `-v`, `--version`: Show the version and exit
+
+### Examples
+Run with default configuration:
 ```bash
-uv venv python main.py --auto
+py-nvfan
+```
+
+Specify a custom configuration file:
+```bash
+py-nvfan --config /path/to/config.yaml
+```
+
+Show version information:
+```bash
+py-nvfan --version
 ```
 
 ## Contributing
