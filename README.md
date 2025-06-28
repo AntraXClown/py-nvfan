@@ -46,7 +46,7 @@ py-nvfan is a Python application designed to monitor and control NVIDIA GPU fan 
 Run the application from the command line:
 
 ```bash
-py-nvfan [OPTIONS]
+sudo py-nvfan [OPTIONS]
 ```
 
 ## Options ⚙️
@@ -59,38 +59,38 @@ py-nvfan [OPTIONS]
 Show the help:
 
 ```bash
-py-nvfan --help
+sudo py-nvfan --help
 ```
 
 Run with default configuration:
 
 ```bash
-py-nvfan
+sudo py-nvfan
 ```
 
 Specify a custom configuration file:
 
 ```bash
-py-nvfan --config /path/to/config.yaml
+sudo py-nvfan --config /path/to/config.yaml
 ```
 
 Show version information:
 
 ```bash
-py-nvfan --version
+sudo py-nvfan --version
 ```
 
 ## Config File 📄
 
 By default, **py-nvfan** will create the **_config.yaml_** file (configuration file) in the directory
-**_/home/your-username/.config/py-nvfan/_**
+**_/home/root/.config/py-nvfan/_**
 
 If you want to use a different configuration file, use the --config option
 
 For example:
 
 ```bash
-py-nvfan --config /path/to/another/dir/config.yaml
+sudo py-nvfan --config /path/to/another/dir/config.yaml
 ```
 
 ## Configuration File Structure ⚙️
