@@ -9,7 +9,7 @@ from rich.console import Console
 # APP_NAME
 APP_NAME = "py-nvfan"
 # APP_VERSION
-VERSION = "0.1.18"
+VERSION = "0.1.20"
 
 cl = Console()
 
@@ -36,7 +36,7 @@ def createConfigFile(configFile: str) -> None:
 # temps
 # The target temperatures are the temperatures at which the fan should operate.
 temps:
-- 30
+- 40
 - 50
 - 70
 - 80

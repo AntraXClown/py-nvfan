@@ -1,5 +1,4 @@
 import pynvml
-import os
 
 pynvml.nvmlInit()
 

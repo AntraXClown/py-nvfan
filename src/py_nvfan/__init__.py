@@ -1,9 +1,8 @@
-from .nvidialib import *
+from py_nvfan.nvidialib import *
 from .config import VERSION, printAsciiArt, AppConfig, cl, pc, createConfigFile
 from confz import FileSource
 import argparse
 import os
-import sys
 import time
 
 

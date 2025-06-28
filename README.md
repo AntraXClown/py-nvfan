@@ -104,7 +104,7 @@ The configuration file (typically named `config.yaml`) defines how py-nvfan mana
 # temps
 # The target temperatures (in °C) at which the fan speed should change.
 temps:
-  - 30
+  - 40
   - 50
   - 70
   - 80
